@@ -4,14 +4,14 @@
 _start:
 	mrs    x0, mpidr_el1   // get processor id from mpidr_el1 register
 	and    x0, x0, #0xFF   // use and to check if id is zero
-	cbz    x0, master
+	cbz    x0, init
 	b      loop
 
 loop:
 	wfe
 	b      loop
 
-master:
+init:
 	# set top of stack
 	ldr    x0, =_start
 	mov    sp, x0

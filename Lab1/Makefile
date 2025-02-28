@@ -32,4 +32,4 @@ kernel8.img: $(SRC_DIR)/linker.ld $(OBJ_FILES)
 qemu: 
 	qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -serial null -serial stdio
 gdb:
-	qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none  -serial null -serial stdio -S -s
+	qemu-system-aarch64 -M raspi3b -kernel kernel8.img -display none -serial null -serial stdio -S -s
