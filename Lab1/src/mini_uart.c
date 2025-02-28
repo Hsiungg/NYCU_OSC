@@ -30,30 +30,31 @@ void mini_uart_init(void){
     *AUX_MU_CNTL_REG = 3;                     // Finally, enable transmitter and receiver
 }
 
-void mini_uart_send ( char c )
+void mini_uart_send (char c)
 {
     while(1) {
         // if xxxx xxxx xx1x xxxx => Write
-        if((*(AUX_MU_LSR_REG)&0x20)) 
+        if((*(AUX_MU_LSR_REG) & 0x20)) 
             break;
     }
-    *(AUX_MU_IO_REG) = c;
+    *AUX_MU_IO_REG = c;
 }
 
-char mini_uart_recv ( void )
+char mini_uart_recv (void)
 {
-    // if xxxx xxxx xxxx xxx1 => Read
     while(1) {
-        if((*(AUX_MU_LSR_REG)&0x01)) 
+        // if xxxx xxxx xxxx xxx1 => Read
+        if((*(AUX_MU_LSR_REG) & 0x01)) 
             break;
     }
-    // maybe try add \r\n? 
-    return(*(AUX_MU_IO_REG)&0xFF);
+    char temp = (char)*(AUX_MU_IO_REG) & 0xFF;
+    return temp == '\r' ? '\n' : temp;
+    //return(*(AUX_MU_IO_REG)&0xFF);
 }
 
 void mini_uart_send_string(char* str)
 {
-	for (int i = 0; str[i] != '\0'; i ++) {
-		mini_uart_send((char)str[i]);
-	}
+	while (*str) {
+        mini_uart_send(*str++);
+    }
 }
