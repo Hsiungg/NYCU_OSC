@@ -12,8 +12,9 @@ void commands_list(void)
 void mailbox_status(void)
 {
     mini_uart_send_string("Mailbox info:\r\n");
-    mini_uart_send_string("Board revision: ");
+    mini_uart_send_string("Board revision:          ");
     get_board_revision();
+    get_ARM_memory();
 }
 void execute_command(char *command)
 {

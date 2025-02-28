@@ -1,6 +1,6 @@
 #ifndef _MAILBOX_H
 #define _MAILBOX_H
+void mailbox_call(void);
 void get_board_revision(void);
-void mailbox_call(unsigned int *mailbox);
-
+void get_ARM_memory(void);
 #endif /*_MAILBOX_H */
